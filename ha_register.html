@@ -8,12 +8,26 @@
 </head>
 <body>
     <form action="ha_post.php" method="post" name="login">
-        <input type="text" name="vorname" />
-        <input type="text" name="nachname" />
-        <input type="date" name="geburtsdatum"/>
-        <input type="email" name="email"/>
-        <input type="password" name="passwort" required />
-
+        <p>
+            <label for="vorname">Vorname:</label>
+            <input type="text" name="vorname" id="vorname" required/>
+        </p>
+        <p>
+            <label for="nachname">Nachname:</label>
+            <input type="text" name="nachname" id="nachname" />
+        </p>
+        <p>
+            <label for="geburtsdatum">Geburtsdatum:</label>
+            <input type="date" name="geburtsdatum" id="geburtsdatum" />
+        </p>
+        <p>
+            <label for="email">E-Mail:</label>
+            <input type="email" name="email" id="email" />
+        </p>
+        <p>
+            <label for="passwort">Passwort:</label>
+            <input type="password" name="passwort" id="passwort" required/>
+        </p>
 
         <input type="submit" name="submit" value="Registrieren" />
     </form>

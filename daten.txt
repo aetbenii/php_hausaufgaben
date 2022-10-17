@@ -1,0 +1,3 @@
+test@email.com;12345;benjamin;düring;2003-07-05  
+email@email.com;123;thomas;geier;2003-04-14 
+kevin@froschi.it;froschi;kevin;froschi;2004-04-04 

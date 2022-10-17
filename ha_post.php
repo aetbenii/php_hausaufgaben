@@ -5,41 +5,49 @@ $geburtsdatum = "";
 $email = "";
 $passwort = "";
 $fehler = false;
-$intfo = array();
+$daten = "daten.txt";
+$info = array();
+
 
 if(isset($_POST['vorname']) && $_POST['passwort']){
 
     if(!$_POST['vorname']){
         $fehler = true;
     }else{
-        $info[] = "Vorname: ".$_POST['vorname'];
+        $vorname = $_POST['vorname'];
+        $info[] = "Vorname: ".$vorname;
     }
 
     if(!$_POST['nachname']){
         $fehler = true;
     }else{
-        $info[] = "Nachname: ".$_POST['nachname'];
+        $nachname = $_POST['nachname'];
+        $info[] = "Nachname: ".$nachname;
     }
 
     if(!$_POST['geburtsdatum']){
         $fehler = true;
     }else{
-        $info[] = "Geburtsdatum: ".$_POST['geburtsdatum'];
+        $geburtsdatum = $_POST['geburtsdatum'];
+        $info[] = "Geburtsdatum: ".$geburtsdatum;
     }
 
     if(!$_POST['email']){
         $fehler = true;
     }else{
-        $info[] = "Email: ".$_POST['email'];
+        $email = $_POST['email'];
+        $info[] = "Email: ".$email;
     }
 
     if(!$_POST['passwort']){
         $fehler = true;
     }else{
-        $info[] = "Passwort: ".$_POST['passwort'];
+        $passwort = $_POST['passwort'];
+        $info[] = "Passwort: ".$passwort;
     }
 
 }else{
+    $fehler = true;
     header('Location: ha_register.html');
 }
 ?>
@@ -58,20 +66,42 @@ if(isset($_POST['vorname']) && $_POST['passwort']){
         echo "Es fehlen noch Daten!"
         ?>
         <form action="ha_post.php" method="post" name="login">
-        <input type="text" name="vorname" value="<?=$_POST['vorname']?>" />
-        <input type="text" name="nachname" value="<?=$_POST['nachname']?>" >
-        <input type="date" name="geburtsdatum" value="<?=$_POST['geburtsdatum']?>"/>
-        <input type="email" name="email" value="<?=$_POST['email']?>"/>
-        <input type="password" name="passwort" required>
+        <p>
+            <label for="vorname">Vorname:</label>
+            <input type="text" name="vorname" id="vorname" value="<?=$_POST['vorname']?>"/>
+        </p>
+        <p>
+            <label for="nachname">Nachname:</label>
+            <input type="text" name="nachname" id="nachname"  value="<?=$_POST['nachname']?>"/>
+        </p>
+        <p>
+            <label for="geburtsdatum">Geburtsdatum:</label>
+            <input type="date" name="geburtsdatum" id="geburtsdatum" value="<?=$_POST['geburtsdatum']?>"/>
+        </p>
+        <p>
+            <label for="email">E-Mail:</label>
+            <input type="email" name="email" id="email" value="<?=$_POST['email']?>"/>
+        </p>
+        <p>
+            <label for="passwort">Passwort:</label>
+            <input type="password" name="passwort" id="passwort" required/>
+        </p>
 
-
-        <input type="submit" name="submit" value="Registrieren" />
-    </form>
-<?php } 
- else {
-    foreach($info as $value) {?>
-        <p><?= $value?></p>
-<?php    }
-} ?>
+            <input type="submit" name="submit" value="Registrieren" />
+        </form>
+    <?php } 
+    else {
+        
+        if(file_exists($daten)){
+            $file = fopen("daten.txt", "a") or die("Unable to open file!");
+            $txt = "$email;$passwort;$vorname;$nachname;$geburtsdatum \n";
+            //file_put_contents($daten, $txt);
+            fwrite($file, $txt);
+            fclose($file);
+        }
+        foreach($info as $value) {?>
+            <p><?= $value?></p>
+    <?php    }
+    } ?>
 </body>
 </html>
