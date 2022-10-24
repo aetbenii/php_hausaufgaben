@@ -1,9 +1,44 @@
+<?php
+$userall = array();
+$user = array();
+
+$datei = "daten.txt";
+$handle = fopen($datei, "r");
+$alldata = fread($handle, filesize("daten.txt"));
+$userall = explode(' ', $alldata);
+$fehler = false;
+$login = false;
+
+
+if(isset($_POST['email']) && $_POST['passwort']){
+    for ($i=0; $i < count(file($datei)); $i++) { 
+        $user = explode(';', $userall[$i]);
+        if(($user[0] == $_POST['email']) && ($user[1] == $_POST['passwort'])){
+            //$login = true;
+            session_start();
+            $_SESSION['login'] = "ananas";
+            header("Location:dash.php");
+            die();
+        }
+    }
+    if(!$login){
+        $fehler = true;
+    }
+}else{
+    //header("Location: login.php");
+}
+
+if($fehler){
+    header("Location:login.php?fehler=true");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Login - FREE MONEY</title>
 </head>
 <body>
@@ -14,6 +49,7 @@
         <p>Email oder Passwort falsch!</p>
     <?php }
     } ?>
+    <div class="formwindow"></div>
     <form action="login_logik.php" method="post">
         <p>
             <label for="email">Email:</label>

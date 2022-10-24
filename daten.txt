@@ -1,3 +1,5 @@
 test@email.com;12345;benjamin;düring;2003-07-05  
 email@email.com;123;thomas;geier;2003-04-14 
 kevin@froschi.it;froschi;kevin;froschi;2004-04-04 
+newuser@gmail.com;123;new;user;2022-10-05 
+adsf@adsf;adsf;ads;dsaf;2022-09-27 
