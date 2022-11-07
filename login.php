@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $userall = array();
 $user = array();
 
@@ -15,7 +17,7 @@ if(isset($_POST['email']) && $_POST['passwort']){
         $user = explode(';', $userall[$i]);
         if(($user[0] == $_POST['email']) && ($user[1] == $_POST['passwort'])){
             //$login = true;
-            session_start();
+            
             $_SESSION['login'] = "ananas";
             header("Location:dash.php");
             die();
